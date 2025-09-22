@@ -423,13 +423,158 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </Layout>
 
-<!-- Import your existing calculator JavaScript -->
-<script>
-  // Your existing calculator JavaScript goes here
-  // I'll provide this separately to keep it clean
-</script>
-
 <style>
-  /* Import all your existing calculator CSS styles here */
-  /* This will be the same CSS from your current calculator */
+  .calculator {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #4a5568;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+  }
+
+  .calculate-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 2rem 0;
+  }
+
+  .calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+  }
+
+  .results {
+    background: #f7fafc;
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+    margin-top: 2rem;
+  }
+
+  .results h3 {
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .result-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .result-section h4 {
+    color: #667eea;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+
+  .result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 6px;
+  }
+
+  .result-item:last-child {
+    background: #e6fffa;
+    border: 1px solid #4fd1c7;
+    font-weight: 700;
+    color: #234e52;
+  }
+
+  .result-label {
+    color: #4a5568;
+    font-weight: 500;
+  }
+
+  .result-value {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1.1rem;
+  }
+
+  .recommendation {
+    background: linear-gradient(135deg, #4fd1c7 0%, #38b2ac 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(79,209,199,0.3);
+  }
+
+  .recommendation h4 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .recommendation p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .calculator {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
