@@ -486,86 +486,7 @@ function calculate() {
             const monthlyRate = interestRate / 100 / 12;
             const numPayments = mortgageTerm * 12;
             maxMortgageFromIncome = maxAffordableMonthly * ((Math.pow(1 + monthlyRate, numPayments) - 1) / (monthlyRate * Math.pow(1 + monthlyRate, numPayments)));
-        } else if (Math.abs(netCashFromBuying) < cashOutflowFromRenting) {
-            // Can afford to buy and buying is financially better
-            buyRentBox.className = 'result-box buy-rent-decision buy-decision';
-            buyRentDecision.textContent = 'BUY';
-        } else {
-            // Can afford to buy but renting is financially better
-            buyRentBox.className = 'result-box buy-rent-decision rent-decision';
-            buyRentDecision.textContent = 'RENT';
-        }
-
-        // Update breakdowns
-        document.getElementById('savingsBreakdown').textContent = formatCurrency(savings);
-        document.getElementById('familyBreakdown').textContent = formatCurrency(familyHelp);
-        document.getElementById('mortgageBreakdown').textContent = formatCurrency(mortgageAmount);
-        document.getElementById('totalAvailableBreakdown').textContent = formatCurrency(totalFunds);
-        
-        document.getElementById('propertyPriceBreakdown').textContent = formatCurrency(propertyPrice);
-        document.getElementById('purchaseFeesBreakdown').textContent = formatCurrency(totalPurchaseFees);
-        document.getElementById('furnitureBreakdown').textContent = formatCurrency(furnitureBudget);
-        document.getElementById('totalRequiredBreakdown').textContent = formatCurrency(totalCost);
-
-        // Update monthly payment info
-        document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
-        document.getElementById('incomeRatio').textContent = incomeRatio.toFixed(1) + '%';
-        document.getElementById('maxRecommended').textContent = formatCurrency(maxRecommended);
-        document.getElementById('remainingIncome').textContent = formatCurrency(remainingIncome);
-
-        // Update detailed costs
-        document.getElementById('transferTax').textContent = formatCurrency(transferTax);
-        document.getElementById('stampDuty').textContent = formatCurrency(stampDuty);
-        document.getElementById('notaryFees').textContent = formatCurrency(notaryFees);
-        document.getElementById('legalFees').textContent = formatCurrency(legalFees);
-        document.getElementById('registrationFees').textContent = formatCurrency(registrationFees);
-        document.getElementById('nieDocuments').textContent = formatCurrency(nieDocuments);
-        document.getElementById('valuationFee').textContent = formatCurrency(valuationFee);
-        document.getElementById('surveyFee').textContent = formatCurrency(surveyFee);
-        document.getElementById('mortgageArrangement').textContent = formatCurrency(mortgageArrangementFee);
-        document.getElementById('contingency').textContent = formatCurrency(contingency);
-        document.getElementById('totalPurchaseFees').textContent = formatCurrency(totalPurchaseFees);
-
-        // Update cashflow analysis - CORRECTED INITIAL INVESTMENT
-        document.getElementById('initialInvestment').textContent = formatCurrency(initialInvestment);
-        document.getElementById('totalMortgagePayments').textContent = formatCurrency(totalMortgagePayments);
-        document.getElementById('totalLivingCosts').textContent = formatCurrency(totalLivingCosts);
-        document.getElementById('totalCashOutflow').textContent = formatCurrency(totalCashOutflow);
-        document.getElementById('yearsDisplay').textContent = yearsBeforeSale;
-        document.getElementById('futureValue').textContent = formatCurrency(futureValue);
-        document.getElementById('remainingMortgage').textContent = '-' + formatCurrency(remainingMortgage);
-        document.getElementById('salesCostsDisplay').textContent = '-' + formatCurrency(salesCosts);
-        document.getElementById('capitalGainsTaxAmount').textContent = '-' + formatCurrency(capitalGainsTax);
-        document.getElementById('netProceeds').textContent = formatCurrency(netProceeds);
-        document.getElementById('netCashFromBuying').textContent = formatCurrency(netCashFromBuying);
-        document.getElementById('cashOutflowFromRenting').textContent = '-' + formatCurrency(cashOutflowFromRenting);
-        document.getElementById('financialAdvantage').textContent = formatCurrency(financialAdvantage);
-
-        // Update capital gains calculation
-        document.getElementById('proceedsFromSale').textContent = formatCurrency(futureValue);
-        document.getElementById('lessHomePrice').textContent = '-' + formatCurrency(propertyPrice);
-        document.getElementById('lessPurchaseCosts').textContent = '-' + formatCurrency(totalPurchaseFees);
-        document.getElementById('lessSalesCosts').textContent = '-' + formatCurrency(salesCosts);
-        document.getElementById('netGain').textContent = formatCurrency(capitalGain);
-        document.getElementById('capitalGainsTaxTotal').textContent = formatCurrency(capitalGainsTax);
-
-    } catch (error) {
-        console.error('Calculation error:', error);
-    }
-}
-
-// Initialize calculator when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    calculate();
-});
-
-// Also try to initialize immediately in case DOM is already loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', calculate);
-} else {
-    calculate();
-}
-</script>maxAffordableMonthly > 0) {
+        } else if (maxAffordableMonthly > 0) {
             maxMortgageFromIncome = maxAffordableMonthly * mortgageTerm * 12;
         }
 
@@ -674,4 +595,346 @@ if (document.readyState === 'loading') {
             // Can't afford to buy, so recommend rent
             buyRentBox.className = 'result-box buy-rent-decision rent-decision';
             buyRentDecision.textContent = 'RENT';
-        } else if (
+        } else if (Math.abs(netCashFromBuying) < cashOutflowFromRenting) {
+            // Can afford to buy and buying is financially better
+            buyRentBox.className = 'result-box buy-rent-decision buy-decision';
+            buyRentDecision.textContent = 'BUY';
+        } else {
+            // Can afford to buy but renting is financially better
+            buyRentBox.className = 'result-box buy-rent-decision rent-decision';
+            buyRentDecision.textContent = 'RENT';
+        }
+
+        // Update breakdowns
+        document.getElementById('savingsBreakdown').textContent = formatCurrency(savings);
+        document.getElementById('familyBreakdown').textContent = formatCurrency(familyHelp);
+        document.getElementById('mortgageBreakdown').textContent = formatCurrency(mortgageAmount);
+        document.getElementById('totalAvailableBreakdown').textContent = formatCurrency(totalFunds);
+        
+        document.getElementById('propertyPriceBreakdown').textContent = formatCurrency(propertyPrice);
+        document.getElementById('purchaseFeesBreakdown').textContent = formatCurrency(totalPurchaseFees);
+        document.getElementById('furnitureBreakdown').textContent = formatCurrency(furnitureBudget);
+        document.getElementById('totalRequiredBreakdown').textContent = formatCurrency(totalCost);
+
+        // Update monthly payment info
+        document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+        document.getElementById('incomeRatio').textContent = incomeRatio.toFixed(1) + '%';
+        document.getElementById('maxRecommended').textContent = formatCurrency(maxRecommended);
+        document.getElementById('remainingIncome').textContent = formatCurrency(remainingIncome);
+
+        // Update detailed costs
+        document.getElementById('transferTax').textContent = formatCurrency(transferTax);
+        document.getElementById('stampDuty').textContent = formatCurrency(stampDuty);
+        document.getElementById('notaryFees').textContent = formatCurrency(notaryFees);
+        document.getElementById('legalFees').textContent = formatCurrency(legalFees);
+        document.getElementById('registrationFees').textContent = formatCurrency(registrationFees);
+        document.getElementById('nieDocuments').textContent = formatCurrency(nieDocuments);
+        document.getElementById('valuationFee').textContent = formatCurrency(valuationFee);
+        document.getElementById('surveyFee').textContent = formatCurrency(surveyFee);
+        document.getElementById('mortgageArrangement').textContent = formatCurrency(mortgageArrangementFee);
+        document.getElementById('contingency').textContent = formatCurrency(contingency);
+        document.getElementById('totalPurchaseFees').textContent = formatCurrency(totalPurchaseFees);
+
+        // Update cashflow analysis
+        document.getElementById('initialInvestment').textContent = formatCurrency(initialInvestment);
+        document.getElementById('totalMortgagePayments').textContent = formatCurrency(totalMortgagePayments);
+        document.getElementById('totalLivingCosts').textContent = formatCurrency(totalLivingCosts);
+        document.getElementById('totalCashOutflow').textContent = formatCurrency(totalCashOutflow);
+        document.getElementById('yearsDisplay').textContent = yearsBeforeSale;
+        document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+        document.getElementById('remainingMortgage').textContent = '-' + formatCurrency(remainingMortgage);
+        document.getElementById('salesCostsDisplay').textContent = '-' + formatCurrency(salesCosts);
+        document.getElementById('capitalGainsTaxAmount').textContent = '-' + formatCurrency(capitalGainsTax);
+        document.getElementById('netProceeds').textContent = formatCurrency(netProceeds);
+        document.getElementById('netCashFromBuying').textContent = formatCurrency(netCashFromBuying);
+        document.getElementById('cashOutflowFromRenting').textContent = '-' + formatCurrency(cashOutflowFromRenting);
+        document.getElementById('financialAdvantage').textContent = formatCurrency(financialAdvantage);
+
+        // Update capital gains calculation
+        document.getElementById('proceedsFromSale').textContent = formatCurrency(futureValue);
+        document.getElementById('lessHomePrice').textContent = '-' + formatCurrency(propertyPrice);
+        document.getElementById('lessPurchaseCosts').textContent = '-' + formatCurrency(totalPurchaseFees);
+        document.getElementById('lessSalesCosts').textContent = '-' + formatCurrency(salesCosts);
+        document.getElementById('netGain').textContent = formatCurrency(capitalGain);
+        document.getElementById('capitalGainsTaxTotal').textContent = formatCurrency(capitalGainsTax);
+
+    } catch (error) {
+        console.error('Calculation error:', error);
+    }
+}
+
+// Initialize calculator when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    calculate();
+});
+
+// Also try to initialize immediately in case DOM is already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', calculate);
+} else {
+    calculate();
+}
+</script>
+
+<style>
+/* Overall container with grey sides extending full height */
+.spain-calculator {
+    width: 100vw !important;
+    max-width: none !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    position: relative !important;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    font-size: 13px;
+    min-height: 100vh;
+    background: linear-gradient(
+        to right,
+        #d3d3d3 0%,
+        #d3d3d3 16.67%,
+        #f5f5f5 16.67%,
+        #f5f5f5 83.33%,
+        #d3d3d3 83.33%,
+        #d3d3d3 100%
+    );
+}
+
+/* Page Title */
+.spain-calculator::before {
+    content: "Spanish Rent or Buy Calculator";
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #27ae60;
+    background-color: #fff9c4;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* Main Calculator Grid - 6 columns with grey sides */
+.spain-calculator .container {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr 0.75fr 0.75fr 0.75fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+    padding: 0 15px 15px 15px;
+    margin-bottom: 20px;
+    min-height: 80vh;
+}
+
+/* Top Row - Input columns 2-4, Cashflow spans all rows in column 5 */
+.spain-calculator .financial-position {
+    grid-column: 2;
+    grid-row: 1;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.spain-calculator .property-details {
+    grid-column: 3;
+    grid-row: 1;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.spain-calculator .living-costs {
+    grid-column: 4;
+    grid-row: 1;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Cashflow Analysis - spans full height in column 5, all rows */
+.spain-calculator .section-cashflow {
+    grid-column: 5;
+    grid-row: 1 / -1;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* Affordability - spans ONLY columns 2-4, row 2 */
+.spain-calculator .affordability {
+    grid-column: 2 / 5;
+    grid-row: 2;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Bottom Row - Output columns 2-4 SIDE BY SIDE, row 3 */
+.spain-calculator .section-funds {
+    grid-column: 2;
+    grid-row: 3;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.spain-calculator .section-purchase {
+    grid-column: 3;
+    grid-row: 3;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.spain-calculator .capital-gains {
+    grid-column: 4;
+    grid-row: 3;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Input styling */
+.spain-calculator .input-group {
+    margin-bottom: 8px;
+}
+
+.spain-calculator label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    color: #34495e;
+    font-size: 12px;
+}
+
+.spain-calculator .label-number {
+    background: #3498db;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+.spain-calculator input, 
+.spain-calculator select {
+    width: 100%;
+    padding: 3px 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: 24px;
+}
+
+.spain-calculator h2, 
+.spain-calculator h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    font-size: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #3498db;
+    margin-bottom: 15px;
+}
+
+/* Results styling */
+.spain-calculator .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.spain-calculator .result-box {
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.spain-calculator .funds-available {
+    background-color: #e8f5e8;
+    border: 2px solid #27ae60;
+}
+
+.spain-calculator .total-cost {
+    background-color: #fef9e7;
+    border: 2px solid #f39c12;
+}
+
+.spain-calculator .affordability-result {
+    border: 2px solid #e74c3c;
+}
+
+.spain-calculator .buy-rent-decision {
+    border: 2px solid #9b59b6;
+}
+
+.spain-calculator .affordable {
+    background-color: #e8f5e8;
+    border-color: #27ae60;
+}
+
+.spain-calculator .not-affordable {
+    background-color: #fdf2f2;
+    border-color: #e74c3c;
+}
+
+.spain-calculator .buy-decision {
+    background-color: #e8f5e8;
+    border-color: #27ae60;
+}
+
+.spain-calculator .rent-decision {
+    background-color: #fdf2f2;
+    border-color: #e74c3c;
+}
+
+.spain-calculator .result-value {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.spain-calculator .result-label {
+    font-size: 11px;
+    color: #666;
+}
+
+/* Cost item styling */
+.spain-calculator .cost-item,
+.spain-calculator .breakdown-item,
+.spain-calculator .monthly-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+
+.spain-calculator .cost-item.total,
+.spain-calculator .breakdown-total {
+    font-weight: bold;
+    border-top: 2px solid #343a40;
+    border-bottom: none;
+    margin-top: 8px;
+    background-color: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+}
+</style>
