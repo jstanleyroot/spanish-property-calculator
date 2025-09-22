@@ -3,578 +3,181 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Spanish Property Calculator - Rent vs Buy Analysis">
-  <!-- Your existing calculator HTML with some Astro enhancements -->
-  <div class="spain-calculator">
-    <!-- Main Calculator Grid - All sections are direct children of container -->
-    <div class="container">
-      <!-- Row 1: Input columns -->
-      <div class="financial-position">
-        <h2>Your Financial Position</h2>
-        
-        <div class="input-group">
-          <label for="netSalary"><span class="label-number">1</span>Annual Net Salary (€):</label>
-          <input type="number" id="netSalary" value="40000" oninput="calculate()">
+<Layout title="Spanish Property Calculator">
+  <div class="calculator">
+    <h1>Spanish Property Calculator</h1>
+    
+    <form id="calculator-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="propertyValue">Property Value (€)</label>
+          <input type="number" id="propertyValue" name="propertyValue" placeholder="300000" required>
         </div>
         
-        <div class="input-group">
-          <label for="savings"><span class="label-number">2</span>Current Savings Available (€):</label>
-          <input type="number" id="savings" value="110000" oninput="calculate()">
+        <div class="form-group">
+          <label for="downPayment">Down Payment (%)</label>
+          <input type="number" id="downPayment" name="downPayment" placeholder="20" min="0" max="100" required>
         </div>
         
-        <div class="input-group">
-          <label for="familyHelp"><span class="label-number">3</span>Other Resources (€):</label>
-          <input type="number" id="familyHelp" value="0" oninput="calculate()">
+        <div class="form-group">
+          <label for="monthlyRent">Monthly Rent (€)</label>
+          <input type="number" id="monthlyRent" name="monthlyRent" placeholder="1200" required>
         </div>
         
-        <div class="input-group">
-          <label for="ltv"><span class="label-number">4</span>Mortgage LTV Available (%):</label>
-          <input type="number" id="ltv" value="70" min="0" max="100" oninput="calculate()">
+        <div class="form-group">
+          <label for="interestRate">Mortgage Interest Rate (%)</label>
+          <input type="number" id="interestRate" name="interestRate" placeholder="3.5" step="0.1" required>
         </div>
         
-        <div class="input-group">
-          <label for="interestRate"><span class="label-number">5</span>Mortgage Interest Rate (%):</label>
-          <input type="number" id="interestRate" value="3.5" step="0.1" oninput="calculate()">
-        </div>
-        
-        <div class="input-group">
-          <label for="mortgageTerm"><span class="label-number">6</span>Mortgage Term (years):</label>
-          <input type="number" id="mortgageTerm" value="25" min="10" max="40" oninput="calculate()">
-        </div>
-      </div>
-
-      <div class="property-details">
-        <h2>Property Details</h2>
-        
-        <div class="input-group">
-          <label for="propertyPrice"><span class="label-number">7</span>Property Purchase Price (€):</label>
-          <input type="number" id="propertyPrice" value="240000" oninput="calculate()">
-        </div>
-        
-        <div class="input-group">
-          <label for="propertyType"><span class="label-number">8</span>Property Type:</label>
-          <select id="propertyType" onchange="calculate()">
-            <option value="resale">Resale Property</option>
-            <option value="newbuild">New-Build Property</option>
+        <div class="form-group">
+          <label for="loanTerm">Loan Term (years)</label>
+          <select id="loanTerm" name="loanTerm" required>
+            <option value="15">15 years</option>
+            <option value="20">20 years</option>
+            <option value="25" selected>25 years</option>
+            <option value="30">30 years</option>
           </select>
         </div>
         
-        <div class="input-group">
-          <label for="agentFee"><span class="label-number">9</span>Region:</label>
-          <select id="region" onchange="calculate()">
-            <option value="madrid">Madrid (6.5% transfer tax)</option>
-            <option value="catalonia">Catalonia (10% transfer tax)</option>
-            <option value="valencia">Valencia (8% transfer tax)</option>
-            <option value="andalusia">Andalusia (8% transfer tax)</option>
-            <option value="other">Other Region (8% transfer tax)</option>
-          </select>
+        <div class="form-group">
+          <label for="yearsToStay">How long will you stay? (years)</label>
+          <input type="number" id="yearsToStay" name="yearsToStay" placeholder="5" min="1" required>
         </div>
         
-        <div class="input-group">
-          <label for="furnitureBudget"><span class="label-number">10</span>Furniture & Moving Budget (€):</label>
-          <input type="number" id="furnitureBudget" value="8000" oninput="calculate()">
+        <div class="form-group">
+          <label for="availableFunds">Available Funds (€)</label>
+          <input type="number" id="availableFunds" name="availableFunds" placeholder="100000" required>
         </div>
         
-        <div class="input-group">
-          <label for="yearsBeforeSale"><span class="label-number">11</span>Years Before Sale:</label>
-          <input type="number" id="yearsBeforeSale" value="5" min="1" max="50" oninput="calculate()">
+        <div class="form-group">
+          <label for="furnitureBudget">Furniture Budget (€)</label>
+          <input type="number" id="furnitureBudget" name="furnitureBudget" placeholder="15000">
         </div>
-        
-        <div class="input-group">
-          <label for="priceInflation"><span class="label-number">12</span>House Price Inflation (%):</label>
-          <input type="number" id="priceInflation" value="3" step="0.1" min="0" max="10" oninput="calculate()">
-        </div>
-      </div>
-
-      <div class="living-costs">
-        <h3>Living Costs & Analysis</h3>
-        
-        <div class="input-group">
-          <label for="homeInsurance"><span class="label-number">13</span>Home Insurance (Annual €):</label>
-          <input type="number" id="homeInsurance" value="600" oninput="calculate()">
-        </div>
-        
-        <div class="input-group">
-          <label for="propertyTax"><span class="label-number">14</span>Property Tax - IBI (Annual €):</label>
-          <input type="number" id="propertyTax" value="800" oninput="calculate()">
-        </div>
-        
-        <div class="input-group">
-          <label for="communityFees"><span class="label-number">15</span>Community Fees (Annual €):</label>
-          <input type="number" id="communityFees" value="1200" oninput="calculate()">
-        </div>
-        
-        <div class="input-group">
-          <label for="maintenance"><span class="label-number">16</span>Maintenance (Annual €):</label>
-          <input type="number" id="maintenance" value="1500" oninput="calculate()">
-        </div>
-        
-        <div class="input-group">
-          <label for="salesCosts"><span class="label-number">17</span>Sales Costs (% of sale price):</label>
-          <input type="number" id="salesCosts" value="4" step="0.1" min="0" max="10" oninput="calculate()">
-        </div>
-        
-        <div class="input-group">
-          <label for="monthlyRent"><span class="label-number">18</span>Equivalent Rent (€):</label>
-          <input type="number" id="monthlyRent" value="1250" oninput="calculate()">
-        </div>
-      </div>
-
-      <!-- Cashflow Analysis - spans full height -->
-      <div class="section-cashflow">
-        <h3>Cashflow Analysis</h3>
-        
-        <div class="cost-item">
-          <span>Initial Investment:</span>
-          <span id="initialInvestment">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Total Mortgage Payments:</span>
-          <span id="totalMortgagePayments">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Total Living Costs:</span>
-          <span id="totalLivingCosts">€0</span>
-        </div>
-        <div class="cost-item total">
-          <span><strong>Cash Outflow Buying:</strong></span>
-          <span id="totalCashOutflow"><strong>€0</strong></span>
-        </div>
-        
-        <div style="margin: 15px 0; border-top: 1px solid #ccc; padding-top: 15px;">
-          <div class="cost-item">
-            <span>Property Value After <span id="yearsDisplay">0</span> Years:</span>
-            <span id="futureValue">€0</span>
-          </div>
-          <div class="cost-item">
-            <span>Less: Remaining Mortgage:</span>
-            <span id="remainingMortgage" class="negative-value">-€0</span>
-          </div>
-          <div class="cost-item">
-            <span>Less: Sales Costs:</span>
-            <span id="salesCostsDisplay" class="negative-value">-€0</span>
-          </div>
-          <div class="cost-item">
-            <span>Less: Capital Gains Tax (19%):</span>
-            <span id="capitalGainsTaxAmount" class="negative-value">-€0</span>
-          </div>
-          <div class="cost-item total">
-            <span><strong>Cash Inflow Selling:</strong></span>
-            <span id="netProceeds"><strong>€0</strong></span>
-          </div>
-          
-          <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #333;">
-            <div class="cost-item total cashflow-final-rows" style="background-color: #e3f2fd;">
-              <span><strong>Net Cash Buying:</strong></span>
-              <span id="netCashFromBuying"><strong>€0</strong></span>
-            </div>
-            <div class="cost-item total cashflow-final-rows" style="background-color: #fff3e0;">
-              <span><strong>Net Cash Renting:</strong></span>
-              <span id="cashOutflowFromRenting"><strong>€0</strong></span>
-            </div>
-            <div class="cost-item total cashflow-final-rows" style="background-color: #f3e5f5;">
-              <span><strong>Financial Advantage:</strong></span>
-              <span id="financialAdvantage"><strong>€0</strong></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2: Affordability spans columns 1-3 -->
-      <div class="affordability">
-        <h2>Affordability Analysis</h2>
-        <div class="results-grid">
-          <div class="result-box funds-available">
-            <div class="result-value" id="totalFunds">€0</div>
-            <div class="result-label">Total Funds Available</div>
-          </div>
-          
-          <div class="result-box total-cost">
-            <div class="result-value" id="totalCost">€0</div>
-            <div class="result-label">Total Cost (Inc. Furniture)</div>
-          </div>
-          
-          <div class="result-box affordability-result" id="affordabilityBox">
-            <div class="result-value" id="affordabilityResult">€0</div>
-            <div class="result-label" id="affordabilityLabel">Surplus/Shortfall</div>
-          </div>
-          
-          <div class="result-box buy-rent-decision" id="buyRentBox">
-            <div class="result-value" id="buyRentDecision">BUY</div>
-            <div class="result-label">Recommendation</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 3: Bottom three columns side by side -->
-      <div class="section-funds">
-        <h3>Funds Available</h3>
-        <div class="breakdown-item">
-          <span>Current Savings:</span>
-          <span id="savingsBreakdown">€0</span>
-        </div>
-        <div class="breakdown-item">
-          <span>Other Resources:</span>
-          <span id="familyBreakdown">€0</span>
-        </div>
-        <div class="breakdown-item breakdown-highlight">
-          <span>Mortgage Amount:</span>
-          <span id="mortgageBreakdown">€0</span>
-        </div>
-        <div class="breakdown-item breakdown-total">
-          <span>Total Available:</span>
-          <span id="totalAvailableBreakdown">€0</span>
-        </div>
-        
-        <h3>Total Costs</h3>
-        <div class="breakdown-item">
-          <span>Property Price:</span>
-          <span id="propertyPriceBreakdown">€0</span>
-        </div>
-        <div class="breakdown-item">
-          <span>Purchase Taxes/Fees:</span>
-          <span id="purchaseFeesBreakdown">€0</span>
-        </div>
-        <div class="breakdown-item">
-          <span>Furniture & Moving:</span>
-          <span id="furnitureBreakdown">€0</span>
-        </div>
-        <div class="breakdown-item breakdown-total">
-          <span>Total Required:</span>
-          <span id="totalRequiredBreakdown">€0</span>
-        </div>
-
-        <h3>Monthly Payment</h3>
-        <div class="monthly-item highlight">
-          <span><strong>Mortgage Payment:</strong></span>
-          <span id="monthlyPayment">€0</span>
-        </div>
-        <div class="monthly-item">
-          <span>As % of Net Monthly Income:</span>
-          <span id="incomeRatio">0%</span>
-        </div>
-        <div class="monthly-item">
-          <span>Max Recommended (35%):</span>
-          <span id="maxRecommended">€0</span>
-        </div>
-        <div class="monthly-item breakdown-total">
-          <span>Monthly Income:</span>
-          <span id="remainingIncome">€0</span>
-        </div>
-      </div>
-
-      <div class="section-purchase">
-        <h3>Detailed Purchase Costs</h3>
-        <div class="cost-item">
-          <span>Transfer Tax/VAT:</span>
-          <span id="transferTax">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Stamp Duty (New-build only):</span>
-          <span id="stampDuty">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Notary Fees:</span>
-          <span id="notaryFees">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Legal Fees (1% of price):</span>
-          <span id="legalFees">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Property Registration:</span>
-          <span id="registrationFees">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>NIE & Documents:</span>
-          <span id="nieDocuments">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Property Valuation:</span>
-          <span id="valuationFee">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Survey/Inspection:</span>
-          <span id="surveyFee">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Mortgage Arrangement Fee:</span>
-          <span id="mortgageArrangement">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Bank Charges & Admin:</span>
-          <span id="bankCharges">€800</span>
-        </div>
-        <div class="cost-item">
-          <span>Building/Structural Survey:</span>
-          <span id="buildingSurvey">€600</span>
-        </div>
-        <div class="cost-item">
-          <span>Mortgage Life Insurance:</span>
-          <span id="mortgageInsurance">€400</span>
-        </div>
-        <div class="cost-item">
-          <span>Land Registry Search:</span>
-          <span id="landRegistry">€150</span>
-        </div>
-        <div class="cost-item">
-          <span>Deposit Protection Insurance:</span>
-          <span id="depositProtection">€200</span>
-        </div>
-        <div class="cost-item">
-          <span>Tax Advice/Consultation:</span>
-          <span id="taxAdvice">€400</span>
-        </div>
-        <div class="cost-item">
-          <span>Completion Contingency (2%):</span>
-          <span id="contingency">€0</span>
-        </div>
-        <div class="cost-item total">
-          <span><strong>Total Purchase Fees:</strong></span>
-          <span id="totalPurchaseFees"><strong>€0</strong></span>
-        </div>
-      </div>
-
-      <div class="capital-gains">
-        <h3>Capital Gains Calculation</h3>
-        <div class="cost-item">
-          <span>Proceeds from Sale:</span>
-          <span id="proceedsFromSale">€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Less: Home Price:</span>
-          <span id="lessHomePrice" class="negative-value">-€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Less: Purchase Costs:</span>
-          <span id="lessPurchaseCosts" class="negative-value">-€0</span>
-        </div>
-        <div class="cost-item">
-          <span>Less: Sales Costs:</span>
-          <span id="lessSalesCosts" class="negative-value">-€0</span>
-        </div>
-        <div class="cost-item total">
-          <span>Net Gain:</span>
-          <span id="netGain">€0</span>
-        </div>
-        <div class="cost-item total">
-          <span><strong>Capital Gains Tax (19%):</strong></span>
-          <span id="capitalGainsTaxTotal"><strong>€0</strong></span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Instructions Section - 3 columns aligned with input sections above -->
-    <div class="instructions">
-      <h2>How to Use This Calculator</h2>
-      
-      <div class="column-1">
-        <h3>Personal Finance Inputs</h3>
-        
-        <p><span class="label-number">1</span><strong>Annual Net Salary:</strong> Your take-home pay after tax.</p>
-        
-        <p><span class="label-number">2</span><strong>Current Savings:</strong> Cash available for property purchase.</p>
-        
-        <p><span class="label-number">3</span><strong>Other Resources:</strong> Additional funds from family or other sources as gift or loan.</p>
-        
-        <p><span class="label-number">4</span><strong>Mortgage LTV:</strong> 60-70% for non-residents, 70-80% for residents.</p>
-        
-        <p><span class="label-number">5</span><strong>Interest Rate:</strong> Fixed 3-4%, variable Euribor + 1-1.5%.</p>
-        
-        <p><span class="label-number">6</span><strong>Mortgage Term:</strong> 20-30 years typical, up to 40 for younger buyers.</p>
       </div>
       
-      <div class="column-2">
-        <h3>Property Details</h3>
-        
-        <p><span class="label-number">7</span><strong>Purchase Price:</strong> Listed price.</p>
-        
-        <p><span class="label-number">8</span><strong>Property Type:</strong> New-build: 10% VAT + stamp duty. Resale: regional transfer tax.</p>
-        
-        <p><span class="label-number">9</span><strong>Region:</strong> Madrid 6-7%, others 8-10%</p>
-        
-        <p><span class="label-number">10</span><strong>Furniture Budget:</strong> Properties usually sold unfurnished.</p>
-        
-        <p><span class="label-number">11</span><strong>Years Before Sale:</strong> How long you plan to own the property.</p>
-
-        <p><span class="label-number">12</span><strong>Expected Annual Price Inflation:</strong> Expected annual percentage increase in property value.</p>
-      </div>
-      
-      <div class="column-3">
-        <h3>Living Costs & Analysis</h3>
-        
-        <p><span class="label-number">13</span><strong>Home Insurance:</strong> Annual cost for property insurance coverage.</p>
-        
-        <p><span class="label-number">14</span><strong>Property Tax (IBI):</strong> Annual municipal property tax in Spain.</p>
-        
-        <p><span class="label-number">15</span><strong>Community Fees:</strong> Annual fees for building maintenance and shared areas.</p>
-        
-        <p><span class="label-number">16</span><strong>Maintenance:</strong> Annual budget for property upkeep and repairs.</p>
-        
-        <p><span class="label-number">17</span><strong>Sales Costs:</strong> Estate agent and legal fees for selling (as % of sale price).</p>
-        
-        <p><span class="label-number">18</span><strong>Rent of Equivalent Place:</strong> Monthly rent for similar property.</p>
+      <button type="submit" class="calculate-btn">Calculate</button>
+    </form>
+    
+    <div id="results" class="results" style="display: none;">
+      <div class="result-section">
+        <h4>Purchase Costs</h4>
+        <div class="result-item">
+          <span class="result-label">Property Value:</span>
+          <span class="result-value" id="displayPropertyValue">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Down Payment:</span>
+          <span class="result-value" id="displayDownPayment">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Transfer Tax (10%):</span>
+          <span class="result-value" id="displayTransferTax">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Notary & Legal Fees:</span>
+          <span class="result-value" id="displayLegalFees">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Total Purchase Cost:</span>
+          <span class="result-value" id="displayTotalCost">€0</span>
+        </div>
       </div>
 
-      <div class="copyright">
-        © J Stanley Root 2025
+      <div class="result-section">
+        <h4>Monthly Costs</h4>
+        <div class="result-item">
+          <span class="result-label">Monthly Mortgage:</span>
+          <span class="result-value" id="displayMonthlyMortgage">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Monthly Rent (Alternative):</span>
+          <span class="result-value" id="displayMonthlyRent">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Monthly Savings (Buy vs Rent):</span>
+          <span class="result-value" id="displayMonthlySavings">€0</span>
+        </div>
+      </div>
+
+      <div class="result-section">
+        <h4>Affordability Analysis</h4>
+        <div class="result-item">
+          <span class="result-label">Total Funds Available:</span>
+          <span class="result-value" id="displayAvailableFunds">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Total Cost (Inc. Furniture):</span>
+          <span class="result-value" id="displayTotalWithFurniture">€0</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Surplus/Shortfall:</span>
+          <span class="result-value" id="displayAffordability">€0</span>
+        </div>
+      </div>
+
+      <div class="recommendation" id="recommendation">
+        <h4>Recommendation</h4>
+        <p id="recommendationText">Calculate to see our recommendation</p>
       </div>
     </div>
   </div>
 </Layout>
 
-<style>
-  .calculator {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+<script>
+document.getElementById('calculator-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Get values
+  const propertyValue = parseFloat(document.getElementById('propertyValue').value);
+  const downPaymentPercent = parseFloat(document.getElementById('downPayment').value);
+  const monthlyRent = parseFloat(document.getElementById('monthlyRent').value);
+  const interestRate = parseFloat(document.getElementById('interestRate').value) / 100;
+  const loanTerm = parseInt(document.getElementById('loanTerm').value);
+  const yearsToStay = parseInt(document.getElementById('yearsToStay').value);
+  const availableFunds = parseFloat(document.getElementById('availableFunds').value);
+  const furnitureBudget = parseFloat(document.getElementById('furnitureBudget').value) || 0;
+  
+  // Calculate costs
+  const downPayment = propertyValue * (downPaymentPercent / 100);
+  const loanAmount = propertyValue - downPayment;
+  const transferTax = propertyValue * 0.10; // 10% transfer tax in Spain
+  const legalFees = propertyValue * 0.015; // 1.5% for notary and legal fees
+  const totalPurchaseCost = downPayment + transferTax + legalFees;
+  const totalWithFurniture = totalPurchaseCost + furnitureBudget;
+  
+  // Calculate monthly mortgage payment
+  const monthlyRate = interestRate / 12;
+  const numberOfPayments = loanTerm * 12;
+  const monthlyMortgage = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+  
+  // Calculate savings
+  const monthlySavings = monthlyRent - monthlyMortgage;
+  const affordability = availableFunds - totalWithFurniture;
+  
+  // Update display
+  document.getElementById('displayPropertyValue').textContent = '€' + propertyValue.toLocaleString();
+  document.getElementById('displayDownPayment').textContent = '€' + downPayment.toLocaleString();
+  document.getElementById('displayTransferTax').textContent = '€' + transferTax.toLocaleString();
+  document.getElementById('displayLegalFees').textContent = '€' + legalFees.toLocaleString();
+  document.getElementById('displayTotalCost').textContent = '€' + totalPurchaseCost.toLocaleString();
+  document.getElementById('displayMonthlyMortgage').textContent = '€' + monthlyMortgage.toLocaleString();
+  document.getElementById('displayMonthlyRent').textContent = '€' + monthlyRent.toLocaleString();
+  document.getElementById('displayMonthlySavings').textContent = '€' + monthlySavings.toLocaleString();
+  document.getElementById('displayAvailableFunds').textContent = '€' + availableFunds.toLocaleString();
+  document.getElementById('displayTotalWithFurniture').textContent = '€' + totalWithFurniture.toLocaleString();
+  document.getElementById('displayAffordability').textContent = '€' + affordability.toLocaleString();
+  
+  // Recommendation logic
+  let recommendation = '';
+  if (affordability < 0) {
+    recommendation = 'RENT - You need €' + Math.abs(affordability).toLocaleString() + ' more to buy this property.';
+  } else if (monthlySavings > 0) {
+    recommendation = 'BUY - You\'ll save €' + monthlySavings.toLocaleString() + ' per month compared to renting.';
+  } else {
+    recommendation = 'CONSIDER CAREFULLY - Buying costs €' + Math.abs(monthlySavings).toLocaleString() + ' more per month than renting.';
   }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-  }
-
-  .form-group label {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #4a5568;
-  }
-
-  .form-group input,
-  .form-group select {
-    padding: 0.75rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
-  }
-
-  .calculate-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 2rem 0;
-  }
-
-  .calculate-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102,126,234,0.3);
-  }
-
-  .results {
-    background: #f7fafc;
-    padding: 2rem;
-    border-radius: 12px;
-    border-left: 4px solid #667eea;
-    margin-top: 2rem;
-  }
-
-  .results h3 {
-    color: #2d3748;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-  }
-
-  .result-section {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-
-  .result-section h4 {
-    color: #667eea;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 0.5rem;
-  }
-
-  .result-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.8rem;
-    padding: 0.75rem;
-    background: #f8fafc;
-    border-radius: 6px;
-  }
-
-  .result-item:last-child {
-    background: #e6fffa;
-    border: 1px solid #4fd1c7;
-    font-weight: 700;
-    color: #234e52;
-  }
-
-  .result-label {
-    color: #4a5568;
-    font-weight: 500;
-  }
-
-  .result-value {
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 1.1rem;
-  }
-
-  .recommendation {
-    background: linear-gradient(135deg, #4fd1c7 0%, #38b2ac 100%);
-    color: white;
-    border-radius: 12px;
-    padding: 2rem;
-    margin-top: 2rem;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(79,209,199,0.3);
-  }
-
-  .recommendation h4 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    color: white;
-  }
-
-  .recommendation p {
-    font-size: 1.2rem;
-    opacity: 0.95;
-  }
-
-  /* Mobile responsive */
-  @media (max-width: 768px) {
-    .calculator {
-      margin: 1rem;
-      padding: 1.5rem;
-    }
-
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+  
+  document.getElementById('recommendationText').textContent = recommendation;
+  document.getElementById('results').style.display = 'block';
+});
+</script>
