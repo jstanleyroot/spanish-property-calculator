@@ -201,9 +201,9 @@ const { title } = Astro.props;
     line-height: 1.8;
   }
 
-  /* Calculator page styles */
-  .calculator {
-    max-width: 800px;
+  /* Calculator page styles - matching your actual HTML class names */
+  .calculator-container {
+    max-width: 1400px;
     margin: 2rem auto;
     padding: 2rem;
     background: white;
@@ -211,148 +211,144 @@ const { title } = Astro.props;
     box-shadow: 0 8px 30px rgba(0,0,0,0.1);
   }
 
-  .calculator h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #2d3748;
-    font-size: 2.5rem;
-  }
-
-  .form-grid {
+  .calculator-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
     margin-bottom: 2rem;
   }
 
-  .form-group {
+  /* Section styling */
+  .financial-position,
+  .property-details,
+  .living-costs,
+  .cashflow-analysis,
+  .affordability-analysis,
+  .funds-available,
+  .detailed-costs,
+  .capital-gains {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-left: 4px solid #667eea;
+  }
+
+  .financial-position h2,
+  .property-details h2,
+  .living-costs h2,
+  .cashflow-analysis h2,
+  .affordability-analysis h3,
+  .funds-available h3,
+  .detailed-costs h3,
+  .capital-gains h3 {
+    color: #667eea;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Input groups */
+  .input-group {
+    margin-bottom: 1.2rem;
     display: flex;
     flex-direction: column;
   }
 
-  .form-group label {
-    margin-bottom: 0.5rem;
+  .input-group label {
+    margin-bottom: 0.6rem;
     font-weight: 600;
     color: #4a5568;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
   }
 
-  .form-group input,
-  .form-group select {
-    padding: 0.75rem;
+  .label-number {
+    background: #667eea;
+    color: white;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .input-group input,
+  .input-group select {
+    padding: 0.8rem;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
+    background: white;
   }
 
-  .form-group input:focus,
-  .form-group select:focus {
+  .input-group input:focus,
+  .input-group select:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
   }
 
-  .calculate-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 2rem 0;
+  .input-group input:hover,
+  .input-group select:hover {
+    border-color: #cbd5e0;
   }
 
-  .calculate-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+  /* Special styling for affordability analysis */
+  .affordability-analysis {
+    background: linear-gradient(135deg, #e6fffa 0%, #f0fff4 100%);
+    border-left-color: #4fd1c7;
   }
 
-  .calculate-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
+  .affordability-analysis h3 {
+    color: #234e52;
   }
 
-  .results {
-    background: #f7fafc;
-    padding: 2rem;
-    border-radius: 12px;
-    border-left: 4px solid #667eea;
-    margin-top: 2rem;
-  }
-
-  .result-section {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-
-  .result-section h4 {
-    color: #667eea;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 0.5rem;
-  }
-
-  .result-item {
+  /* Results display styling */
+  .affordability-analysis > div:not(:first-child) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.8rem;
-    padding: 0.75rem;
-    background: #f8fafc;
+    padding: 0.8rem;
+    background: white;
     border-radius: 6px;
-  }
-
-  .result-item:last-child {
-    background: #e6fffa;
-    border: 1px solid #4fd1c7;
-    font-weight: 700;
-    color: #234e52;
-  }
-
-  .result-label {
-    color: #4a5568;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     font-weight: 500;
   }
 
-  .result-value {
-    font-weight: 600;
-    color: #2d3748;
+  .affordability-analysis > div:last-child {
+    background: #4fd1c7;
+    color: white;
+    font-weight: 700;
     font-size: 1.1rem;
   }
 
-  .recommendation {
-    background: linear-gradient(135deg, #4fd1c7 0%, #38b2ac 100%);
-    color: white;
-    border-radius: 12px;
-    padding: 2rem;
-    margin-top: 2rem;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(79,209,199,0.3);
+  /* Grid layout adjustments */
+  @media (min-width: 1200px) {
+    .calculator-grid {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
   }
 
-  .recommendation h4 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    color: white;
-    border: none;
-  }
-
-  .recommendation p {
-    font-size: 1.2rem;
-    opacity: 0.95;
-  }
-
-  /* Mobile responsive */
   @media (max-width: 768px) {
+    .calculator-container {
+      margin: 1rem;
+      padding: 1rem;
+    }
+    
+    .calculator-grid {
+      grid-template-columns: 1fr;
+    }
+
     .nav-menu {
       position: fixed;
       left: -100%;
@@ -384,15 +380,6 @@ const { title } = Astro.props;
 
     .hero-image img {
       height: 200px;
-    }
-
-    .calculator {
-      margin: 1rem;
-      padding: 1.5rem;
-    }
-
-    .form-grid {
-      grid-template-columns: 1fr;
     }
   }
 </style>
