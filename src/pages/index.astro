@@ -1,1 +1,312 @@
+---
+// src/pages/index.astro - Home Page
+import Layout from '../layouts/Layout.astro';
+---
 
+<Layout title="Spanish Property Calculator - Should You Rent or Buy?">
+  <main class="home">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Spanish Property Calculator</h1>
+        <p class="subtitle">Make the right decision: Should you rent or buy property in Spain?</p>
+        
+        <div class="hero-image">
+          <img src="/madrid.jpg" alt="Beautiful view of Madrid skyline" />
+        </div>
+        
+        <div class="intro-text">
+          <h2>Why Use This Calculator?</h2>
+          <p>
+            Buying property in Spain involves complex costs including transfer taxes, notary fees, 
+            mortgage arrangements, and ongoing living expenses. Our comprehensive calculator helps 
+            you understand the true cost of ownership versus renting.
+          </p>
+          
+          <div class="features">
+            <div class="feature">
+              <h3>🏠 Accurate Costs</h3>
+              <p>Includes all Spanish property taxes, legal fees, and regional variations</p>
+            </div>
+            
+            <div class="feature">
+              <h3>📊 Cashflow Analysis</h3>
+              <p>Compare total costs of buying vs renting over your investment timeline</p>
+            </div>
+            
+            <div class="feature">
+              <h3>💰 Real-time Results</h3>
+              <p>Instantly see if you have enough funds and whether buying makes financial sense</p>
+            </div>
+          </div>
+          
+          <div class="cta-section">
+            <a href="/calculator" class="cta-button">
+              Start Calculator
+            </a>
+            <p class="cta-note">Takes 2 minutes • No registration required</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="about">
+      <div class="container">
+        <h2>How It Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Enter Your Finances</h3>
+            <p>Input your salary, savings, and mortgage options</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Property Details</h3>
+            <p>Add property price, location, and your investment timeline</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Get Your Answer</h3>
+            <p>See if you can afford it and whether buying beats renting</p>
+          </div>
+        </div>
+        
+        <div class="disclaimer">
+          <p><strong>Disclaimer:</strong> This calculator provides estimates for guidance only. 
+          Always consult with qualified Spanish property lawyers, tax advisors, and mortgage brokers 
+          for official advice tailored to your situation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .home {
+    min-height: 100vh;
+  }
+  
+  .hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+  }
+  
+  .hero-image {
+    margin: 3rem 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .intro-text {
+    background: white;
+    color: #333;
+    padding: 3rem;
+    border-radius: 20px;
+    margin-top: 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: left;
+  }
+  
+  .intro-text h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .intro-text > p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+  
+  .feature {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+  }
+  
+  .feature h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .feature p {
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .cta-section {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e9ecef;
+  }
+  
+  .cta-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 3rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    display: inline-block;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
+  }
+  
+  .cta-note {
+    margin-top: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .about {
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .about h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+  }
+  
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  
+  .step {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  
+  .step-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1.5rem auto;
+  }
+  
+  .step h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .step p {
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .disclaimer {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .disclaimer p {
+    margin: 0;
+    color: #856404;
+    line-height: 1.6;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+    }
+    
+    .hero-image img {
+      height: 250px;
+    }
+    
+    .intro-text {
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .features {
+      grid-template-columns: 1fr;
+    }
+    
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
